@@ -58,8 +58,8 @@ export default function IMonth({ onDateClick }: CalendarProps) {
         days.push(
           <div
             key={day.toString()}
-            className={`border h-full w-full relative text-sm cursor-pointer hover:bg-blue-50 ${!isSameMonth(day, monthStart) ? 'bg-gray-100 text-gray-400' : ''
-              } ${isSameDay(day, new Date()) ? 'bg-blue-100 border-blue-500' : ''}`}
+            className={`border h-full w-full relative text-sm cursor-pointer hover:bg-primary hover:text-primary-foreground ${!isSameMonth(day, monthStart) ? 'bg-muted-foreground text-muted text-gray-400' : ''
+              } ${isSameDay(day, new Date()) ? 'bg-primary text-primary-foreground' : ''}`}
             onClick={() => onDateClick(cloneDay)}
           >
             <div className="absolute top-1 left-1 text-xs">{formattedDate}</div>
@@ -68,7 +68,7 @@ export default function IMonth({ onDateClick }: CalendarProps) {
         day = addDays(day, 1)
       }
       rows.push(
-        <div key={day.toString()} className="grid grid-cols-7 flex-1">
+        <div key={day.toString()} className="grid grid-cols-7 flex-1 font-bold">
           {days}
         </div>
       )
@@ -79,7 +79,7 @@ export default function IMonth({ onDateClick }: CalendarProps) {
   }
 
   return (
-    <div className="h-[92vh] flex flex-col">
+    <div className="h-[90vh] flex flex-col">
       {renderHeader()}
       {renderDays()}
       <div className="flex-1 flex flex-col">{renderCells()}</div>

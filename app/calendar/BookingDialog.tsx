@@ -48,7 +48,7 @@ export default function BookingDialog({ date, open, onClose }: BookingDialogProp
         <form className="space-y-4">
           <div>
             <Label>Date</Label>
-            <Input type="text" value={date ? format(date, 'PPP') : ''} readOnly />
+            <Input disabled type="text" value={date ? format(date, 'PPP') : ''} readOnly />
           </div>
           <div>
             <Label>Booked By</Label>
