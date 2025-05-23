@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import BookingStatusDialog from "./BookingStatusDialog"
 import { Card, CardContent } from "@/components/ui/card"
- 
+
 export default function TodaysTask() {
 
   const bookings = [
@@ -42,10 +42,9 @@ export default function TodaysTask() {
     setSelectedPercentage(percentage)
     setDialogOpen(true)
   }
-
   return (
     <div className="p-4">
-      <h2 className="  font-semibold mb-4">Today's Booking Requests</h2>
+      <h2 className="  font-semibold mb-4">{"Today's Booking Requests"}</h2>
       <Card className="bg-transparent shadow-none p-0">
         <CardContent className="px-0 py-2 space-y-2">
           {Object.entries(statusCount).map(([status, count]) => {

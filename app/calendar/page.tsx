@@ -1,8 +1,6 @@
 
 import ICalendarX from '@/components/iComponents/ICalendarX'
-import React from 'react'
-import IMonth from './IMonth'
-import Tasks from './Tasks'
+import React from 'react' 
 import Nav from '../Nav'
 import TodaysTask from './TodaysTask'
 import CalendarPage from './ICalendarPage'
