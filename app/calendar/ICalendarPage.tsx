@@ -14,8 +14,10 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className=" max-w-6xl mx-auto px-4">
-      <IMonth onDateClick={handleDateClick} />
+    <div className="w-full max-w-full sm:max-w-6xl mx-auto px-2 sm:px-4">
+      <div className="overflow-x-auto">
+        <IMonth onDateClick={handleDateClick} />
+      </div>
       <BookingDialog
         date={selectedDate}
         open={dialogOpen}
@@ -24,3 +26,5 @@ export default function CalendarPage() {
     </div>
   )
 }
+
+
