@@ -17,6 +17,8 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { useState } from 'react'
 
 interface Property {
   id: string
@@ -39,24 +41,63 @@ interface BookingDialogProps {
 }
 
 export default function BookingDialog({ date, open, onClose }: BookingDialogProps) {
+  const [selectedProperty, setSelectedProperty] = useState<string>('')
+
+  const listOfObj = [
+    {
+      label: 'Date From',
+      type: 'datetime-local',
+      value: date ? new Date().toISOString().slice(0, 16) : '',
+      readOnly: true
+    },
+    {
+      label: 'Date To',
+      type: 'datetime-local',
+      value: '',
+      readOnly: false
+    },
+    {
+      label: 'Payment Method',
+      type: 'text',
+      value: 'Gcash',
+      readOnly: true
+    },
+    {
+      label: 'Peyment Reference',
+      type: 'text',
+      value: '',
+      readOnly: false
+    },
+  ]
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Create Booking</DialogTitle>
         </DialogHeader>
-        <form className="space-y-4">
-          <div>
-            <Label>Date</Label>
-            <Input disabled type="text" value={date ? format(date, 'PPP') : ''} readOnly />
-          </div>
+       <div className='overflow-y-auto max-h-[70vh]'>
+         <form className="space-y-4"  >
+          {listOfObj.map((field, idx) => (
+            <div key={idx}>
+              <Label>{field.label}</Label>
+              <Input
+                type={field.type}
+                defaultValue={field.value}
+                readOnly={field.readOnly}
+                required
+              />
+            </div>
+          ))}
+
           <div>
             <Label>Booked By</Label>
             <Input type="text" placeholder="John Doe" required />
           </div>
+
           <div>
             <Label>Select Property</Label>
-            <Select>
+            <Select onValueChange={setSelectedProperty}>
               <SelectTrigger>
                 <SelectValue placeholder="Select a property" />
               </SelectTrigger>
@@ -73,8 +114,17 @@ export default function BookingDialog({ date, open, onClose }: BookingDialogProp
               </SelectContent>
             </Select>
           </div>
-          <Button type="submit" className="w-full">Confirm Booking</Button>
+
+          <div>
+            <Label>Remarks</Label>
+            <Textarea placeholder="Additional notes or remarks..." />
+          </div>
+
+          <Button type="submit" className="w-full">
+            Confirm Booking
+          </Button>
         </form>
+       </div>
       </DialogContent>
     </Dialog>
   )

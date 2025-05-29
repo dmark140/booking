@@ -18,7 +18,6 @@ export default function page() {
         {/* Main content */}
         <div className="w-full flex flex-col">
           <CalendarPage />
-
           {/* Mobile view: show TodaysTask below CalendarPage */}
           <div className="md:hidden mt-4">
             <TodaysTask />
