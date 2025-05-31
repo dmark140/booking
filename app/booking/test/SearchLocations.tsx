@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const locations = [
     {
@@ -37,6 +38,7 @@ export default function SearchLocations() {
 
     return (
         <div className="max-w-2xl mx-auto p-4">
+            {selectedLocation}
             <Input
                 placeholder="Search by city or house..."
                 value={search}
@@ -54,7 +56,7 @@ export default function SearchLocations() {
                     >
                         {/* {loc.city} → {loc.house} */}
                         <div className="flex items-center gap-2">
-                            <img src={loc.picture} alt="Hotel" className="rounded-md"
+                            <Image src={loc.picture} alt="Hotel" className="rounded-md"
 
                                 style={{ width: '38px', height: '38px', backgroundSize: 'cover', objectFit: 'cover' }}
                             />

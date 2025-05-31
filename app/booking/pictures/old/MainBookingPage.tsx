@@ -1,5 +1,4 @@
 import React from 'react'
-import NavUser from '../../../NavUser'
 import Image from 'next/image'
 import imsgx from './wallpper.webp'
 import BookingMainMenu from './BookingMainMenu'

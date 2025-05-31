@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import {
   Dialog,
   DialogContent,
@@ -74,57 +73,60 @@ export default function BookingDialog({ date, open, onClose }: BookingDialogProp
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create Booking</DialogTitle>
+          <DialogTitle>Create Booking
+            <p className='text-transparent'>{selectedProperty}</p>
+
+          </DialogTitle>
         </DialogHeader>
-       <div className='overflow-y-auto max-h-[70vh]'>
-         <form className="space-y-4"  >
-          {listOfObj.map((field, idx) => (
-            <div key={idx}>
-              <Label>{field.label}</Label>
-              <Input
-                type={field.type}
-                defaultValue={field.value}
-                readOnly={field.readOnly}
-                required
-              />
+        <div className='overflow-y-auto max-h-[70vh]'>
+          <form className="space-y-4"  >
+            {listOfObj.map((field, idx) => (
+              <div key={idx}>
+                <Label>{field.label}</Label>
+                <Input
+                  type={field.type}
+                  defaultValue={field.value}
+                  readOnly={field.readOnly}
+                  required
+                />
+              </div>
+            ))}
+
+            <div>
+              <Label>Booked By</Label>
+              <Input type="text" placeholder="John Doe" required />
             </div>
-          ))}
 
-          <div>
-            <Label>Booked By</Label>
-            <Input type="text" placeholder="John Doe" required />
-          </div>
+            <div>
+              <Label>Select Property</Label>
+              <Select onValueChange={setSelectedProperty}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a property" />
+                </SelectTrigger>
+                <SelectContent>
+                  {properties.map((property) => (
+                    <SelectItem
+                      key={property.id}
+                      value={property.id}
+                      disabled={property.booked}
+                    >
+                      {property.name} {property.booked ? '(Booked)' : ''}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-          <div>
-            <Label>Select Property</Label>
-            <Select onValueChange={setSelectedProperty}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a property" />
-              </SelectTrigger>
-              <SelectContent>
-                {properties.map((property) => (
-                  <SelectItem
-                    key={property.id}
-                    value={property.id}
-                    disabled={property.booked}
-                  >
-                    {property.name} {property.booked ? '(Booked)' : ''}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+            <div>
+              <Label>Remarks</Label>
+              <Textarea placeholder="Additional notes or remarks..." />
+            </div>
 
-          <div>
-            <Label>Remarks</Label>
-            <Textarea placeholder="Additional notes or remarks..." />
-          </div>
-
-          <Button type="submit" className="w-full">
-            Confirm Booking
-          </Button>
-        </form>
-       </div>
+            <Button type="submit" className="w-full">
+              Confirm Booking
+            </Button>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   )

@@ -8,7 +8,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { CalendarIcon, Ghost, Minus, Plus } from "lucide-react";
+import { CalendarIcon, Minus, Plus } from "lucide-react";
 import hotel1  from "./pictures/hotel1.png"
 import Image from "next/image";
 const locations = [
@@ -25,7 +25,7 @@ export default function BookingMainMenu() {
     const [adults, setAdults] = useState(1);
     const [children, setChildren] = useState(0);
     const [childrenAges, setChildrenAges] = useState<number[]>([]);
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [submittedData, setSubmittedData] = useState<any>(null);
 
     const handleChildrenChange = (value: number) => {
@@ -54,7 +54,7 @@ export default function BookingMainMenu() {
         };
         setSubmittedData(formData);
     };
-    const [selected, setselected] = useState(0)
+    // const [selected, setselected] = useState(0)
 
     return (
         <div className=" space-y-4 p-4 min-w-[300px] w-full mx-auto bg-background rounded-lg shadow-md ">

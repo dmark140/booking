@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     domains: ['images.unsplash.com', 'yourdomain.com'],
   },
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
   typescript: {
     ignoreBuildErrors: true,
   },

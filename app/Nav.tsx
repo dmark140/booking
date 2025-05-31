@@ -1,19 +1,12 @@
 'use client';
-
 import {
   Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
 } from '@/components/ui/menubar';
-
 import { useRouter } from 'next/navigation';
-import ThemeToggle from './ThemeToggle';
-
-export default function Nav() {
+type Props = {
+  className?: string;
+}
+export default function Nav({ className }: Props) {
   const router = useRouter();
 
   const GoToCalendar = () => {
@@ -23,25 +16,19 @@ export default function Nav() {
     router.push('/booking');
   };
   return (
-    <div className="flex justify-between items-center p-2    bg-transparent  text-white  w-full">
-      <Menubar className='gap-4 '>
-        <MenubarMenu >
-          <div className='uppercase font-bold '>Biglite Estates</div>
-        </MenubarMenu>
-        <div className='w-20'></div>
-        <MenubarMenu >
-          <button className='mx-2 px-2'>Home</button>
-          <MenubarContent></MenubarContent>
-        </MenubarMenu>
-        <MenubarMenu>
-          <button className='mx-2 px-2 ' onClick={GoToCalendar}>Calendar</button>
-          <MenubarContent></MenubarContent>
-        </MenubarMenu>
-        <MenubarMenu>
-          <button className=' mx-2 px-2 NavBefore ' onClick={GoToBooking}>Booking</button>
-          <MenubarContent></MenubarContent>
-        </MenubarMenu>
-      </Menubar>
+    <div className={`flex justify-between items-center p-2    bg-transparent   border-b w-full ${className}`}>
+      <div className=' px-4  max-w-[1128px]  w-full mx-auto flex justify-between items-center '>
+        <Menubar className='gap-4 w-full  '>
+          <div className='flex  w-full'>
+            <div className='uppercase font-bold'>Biglite Estates</div>
+            <div className='ml-auto w-fit'>
+              <button className='mx-2 px-2'>Home</button>
+              <button className='mx-2 px-2' onClick={GoToCalendar}>Calendar</button>
+              <button className='mx-2 px-2 NavBefore' onClick={GoToBooking}>Booking</button>
+            </div>
+          </div>
+        </Menubar>
+      </div>
       {/* <ThemeToggle /> */}
     </div>
   );

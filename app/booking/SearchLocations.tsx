@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type HouseInfo = {
     city: string;
@@ -70,7 +71,7 @@ const locations = [
 
 export default function SearchLocations({ onSelect }: ImageSelectorProps) {
     const [search, setSearch] = useState("");
-    const [selectedLocation, setSelectedLocation] = useState<string>("");
+    // const [selectedLocation, setSelectedLocation] = useState<string>("");
 
     const filteredLocations = locations.filter((loc) => {
         const query = search.toLowerCase();
@@ -81,40 +82,40 @@ export default function SearchLocations({ onSelect }: ImageSelectorProps) {
     });
 
     return (
-        <div className="max-w-2xl mx-auto p-4">
-            <Input
-                placeholder="Search by city or house..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="mb-4"
-            />
+        <>
+            <div className="max-w-2xl mx-auto p-4">
+                <Input
+                    placeholder="Search by city or house..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="mb-4"
+                />
+                <div className="grid gap-4 col-span-2 overflow-auto max-h-[60vh]">
+                    {filteredLocations.map((loc, i) => (
+                        <Button
+                            key={i}
+                            variant={"ghost"}
+                            className="w-full justify-start"
+                            onClick={() => onSelect(loc)}
+                        // onClick={() => setSelectedLocation(`${loc.city} -> ${loc.house}`)}
+                        >
+                            {/* {loc.city} → {loc.house} */}
+                            <div className="flex items-center gap-2">
+                                <Image src={loc.picture} alt="Hotel" className="rounded-md"
 
-            <div className="grid gap-4 col-span-2 overflow-auto max-h-[60vh]">
-                {filteredLocations.map((loc, i) => (
-                    <Button
-                        key={i}
-                        variant={"ghost"}
-                        className="w-full justify-start"
-                        onClick={() => onSelect(loc)}
-                    // onClick={() => setSelectedLocation(`${loc.city} -> ${loc.house}`)}
-                    >
-                        {/* {loc.city} → {loc.house} */}
-                        <div className="flex items-center gap-2">
-                            <img src={loc.picture} alt="Hotel" className="rounded-md"
-
-                                style={{ width: '38px', height: '38px', backgroundSize: 'cover', objectFit: 'cover' }}
-                            />
-                            <div>
-                                <div className="font-semibold">{loc.city} </div>
-                                <div className="text-muted-foreground"> {loc.house}</div>
+                                    style={{ width: '38px', height: '38px', backgroundSize: 'cover', objectFit: 'cover' }}
+                                />
+                                <div>
+                                    <div className="font-semibold">{loc.city} </div>
+                                    <div className="text-muted-foreground"> {loc.house}</div>
+                                </div>
                             </div>
-                        </div>
-                    </Button>
-                ))}
-                {filteredLocations.length === 0 && (
-                  <>No results found.</>
-                )}
-            </div>
-        </div>
+                        </Button>
+                    ))}
+                    {filteredLocations.length === 0 && (
+                        <div>No results found.</div>
+                    )}
+                </div>
+            </div></>
     );
 }
