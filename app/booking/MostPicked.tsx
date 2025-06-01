@@ -1,7 +1,6 @@
 'use client'
-
 import React from 'react'
-
+import { useRouter } from "next/navigation"; 
 type Hotel = {
     name: string
     location: string
@@ -10,6 +9,15 @@ type Hotel = {
 }
 
 export default function MostPicked() {
+
+    const router = useRouter();
+
+    const handleContinue = () => {
+        router.push("/booking/rooms");
+    };
+
+
+
     const hotels: Hotel[] = [
         {
             name: 'Hotel Mamba',
@@ -46,7 +54,8 @@ export default function MostPicked() {
     const HotelInfo = ({ name, location, price }: Omit<Hotel, 'image'>) => {
         return (
             <>
-                <div className='rounded-b-lg bg-primary text-center content-center absolute top-0 right-0 h-[40px] w-[180px] rounded-bl-lg rounded-tr-lg'>
+                <div
+                    className='rounded-b-lg bg-primary text-center content-center absolute top-0 right-0 h-[40px] w-[180px] rounded-bl-lg rounded-tr-lg'>
                     <p className='text-primary-foreground'>{price}</p>
                 </div>
                 <div className='rounded-b-lg absolute bottom-0 left-0 right-0 h-[60px] px-6 bgGradiant text-primary-foreground'>
@@ -58,7 +67,7 @@ export default function MostPicked() {
     };
 
     return (
-        <div className='max-w-[1128px] mx-auto px-4 mt-20 mb-20'>
+        <div className='max-w-[1128px] mx-auto px-4 mt-20 mb-20' onClick={handleContinue}>
             <p className='NavBefore'>
                 Most Picked
             </p>
@@ -66,7 +75,7 @@ export default function MostPicked() {
             <div className='flex gap-[29px] mt-4'>
                 {/* Main Left Card */}
                 <div
-                    className='relative h-[459px] w-[361px] rounded-lg bg-gray-500'
+                    className='relative h-[459px] w-[361px] rounded-lg bg-gray-500 cursor-pointer'
                     style={{
                         backgroundImage: `url(${hotels[0].image})`,
                         backgroundSize: 'cover',
@@ -88,7 +97,7 @@ export default function MostPicked() {
                         {[1, 2].map((i) => (
                             <div
                                 key={i}
-                                className='relative h-[215px] w-[361px] rounded-lg bg-gray-500'
+                                className='relative h-[215px] w-[361px] rounded-lg bg-gray-500 cursor-pointer'
                                 style={{
                                     backgroundImage: `url(${hotels[i].image})`,
                                     backgroundSize: 'cover',
@@ -109,7 +118,7 @@ export default function MostPicked() {
                         {[3, 4].map((i) => (
                             <div
                                 key={i}
-                                className='relative h-[215px] w-[361px] rounded-lg bg-gray-500'
+                                className='relative h-[215px] w-[361px] rounded-lg bg-gray-500 cursor-pointer'
                                 style={{
                                     backgroundImage: `url(${hotels[i].image})`,
                                     backgroundSize: 'cover',
